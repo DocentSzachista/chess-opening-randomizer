@@ -1,6 +1,7 @@
+import 'package:chess/move_table.dart';
 import 'package:flutter/material.dart';
 
-import 'move_table.dart';
+//import 'move_table.dart';
 
 void main() {
   runApp( MyApp());
@@ -46,7 +47,28 @@ class _HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MoveTable();
+    return MoveTable(_columnNames);
+
+      /*DataTable(
+
+        columns: <DataColumn>[
+          DataColumn(
+            label: Center(child: Text(_columnNames[0],
+                        textAlign: TextAlign.center,)),
+            numeric: true,),
+          DataColumn(label: Center(child: Text(_columnNames[1],
+              )),
+            numeric: false,
+          ),
+          DataColumn(label: Text(_columnNames[2])),
+        ],
+        rows: const <DataRow>[
+          DataRow(cells: <DataCell>[
+            DataCell(Text("1",  textAlign: TextAlign.center)),
+            DataCell(Center(child:Text("e4",  textAlign: TextAlign.center))),
+            DataCell(Text("d5")),
+          ],),
+        ])*/;
   }
   
 }
