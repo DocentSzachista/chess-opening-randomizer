@@ -7,12 +7,12 @@ import 'models/chess_game.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   var game = Game(moves: "1. e4 e5 2. Sf3 Sc6 3. Gc4 Gc5", openingName: 'Italian');
-  var db = ChessDatabase.instance;
+ // var db = ChessDatabase.instance;
   //db.create(game);
-  var returnedGame = db.read(1).then((value) {
-    print(value.moves);
-  });
-  //runApp( MyApp());
+  // var returnedGame = db.read(1).then((value) {
+  //   print(value.convertForAppTable());
+  // });
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -47,12 +47,16 @@ class HomePage extends StatefulWidget{
 
 /// State to hold template data
 class _HomePageState extends State<HomePage>{
+  _HomePageState(){
+    _fetchFromDb();
+  }
   static const List<String> _columnNames = [
     "Nr",
     "White",
     "Black"
   ];
-  static const List<List<Map<String, List<String>>>> move = [
+  List<Map<String, List<String>>> _move = [];
+   /*List<List<Map<String, List<String>>>> _move = []; [
     [
     {
       "move": ["1.", "e4", "e5"]
@@ -69,22 +73,38 @@ class _HomePageState extends State<HomePage>{
         "move": ["2.", "e5", "e4"]
       },
     ]
-  ];
+  ];*/
+  void _fetchFromDb(){
+    var db = ChessDatabase.instance;
+    var returnedGame = db.read(1);
+      returnedGame.then((game) {
+        setState(() {
+          _move = game.convertForAppTable();
+        });
+      } );
+      print(_move);
+      //return (returnedGame as Game).convertForAppTable();
+
+  }
+
   var indeks = 0;
 
   void onClick(){
     setState(() {
-      indeks = 1;
+      _move = _move;
     });
   }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+
+
     return Column( children: <Widget>[
       Row(children: <Widget>[
       Expanded( child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: MoveTable( columns: _columnNames, moves:  move[indeks])
+              child: MoveTable( columns: _columnNames, moves:  _move)
           ),
       ),
 

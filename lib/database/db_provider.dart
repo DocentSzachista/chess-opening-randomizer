@@ -44,6 +44,16 @@ class ChessDatabase{
      }
 
   }
+  Future<List<Game>>readAll() async{
+     final db = await instance.database;
+
+     final mapping = await db.query(tableName,
+     columns: GameFields.columnNames, );
+     List<Game> games = mapping.map((map) {
+       return Game.fromJson(map);
+     }).toList();
+     return games;
+  }
 
 
    /// initialize a new database

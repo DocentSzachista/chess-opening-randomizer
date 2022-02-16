@@ -4,6 +4,7 @@ import './header_row.dart';
 class MoveTable extends StatelessWidget {
   final List<String> columns;
   final List<Map<String, List<String>>> moves ;
+  final List<String> movesAnother = ['e4 e5', 'Sf3', 'Sc6'];
   MoveTable({ required this.columns, required this.moves });
 
   DataColumn _generateDataColumn(String text) {
