@@ -1,10 +1,18 @@
 import 'package:chess/move_table.dart';
 import 'package:flutter/material.dart';
 
-//import 'move_table.dart';
+import 'database/db_provider.dart';
+import 'models/chess_game.dart';
 
 void main() {
-  runApp( MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  var game = Game(moves: "1. e4 e5 2. Sf3 Sc6 3. Gc4 Gc5", openingName: 'Italian');
+  var db = ChessDatabase.instance;
+  //db.create(game);
+  var returnedGame = db.read(1).then((value) {
+    print(value.moves);
+  });
+  //runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +42,7 @@ class HomePage extends StatefulWidget{
   State<StatefulWidget> createState() {
     return _HomePageState();
   }
-  
+
 }
 
 /// State to hold template data
@@ -44,31 +52,55 @@ class _HomePageState extends State<HomePage>{
     "White",
     "Black"
   ];
+  static const List<List<Map<String, List<String>>>> move = [
+    [
+    {
+      "move": ["1.", "e4", "e5"]
+    },
+    {
+      "move": ["2.", "e5", "e4"]
+    },
+  ],
+    [
+      {
+        "move": ["1.", "e6", "e5"]
+      },
+      {
+        "move": ["2.", "e5", "e4"]
+      },
+    ]
+  ];
+  var indeks = 0;
+
+  void onClick(){
+    setState(() {
+      indeks = 1;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MoveTable(_columnNames);
-
-      /*DataTable(
-
-        columns: <DataColumn>[
-          DataColumn(
-            label: Center(child: Text(_columnNames[0],
-                        textAlign: TextAlign.center,)),
-            numeric: true,),
-          DataColumn(label: Center(child: Text(_columnNames[1],
-              )),
-            numeric: false,
+    return Column( children: <Widget>[
+      Row(children: <Widget>[
+      Expanded( child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: MoveTable( columns: _columnNames, moves:  move[indeks])
           ),
-          DataColumn(label: Text(_columnNames[2])),
-        ],
-        rows: const <DataRow>[
-          DataRow(cells: <DataCell>[
-            DataCell(Text("1",  textAlign: TextAlign.center)),
-            DataCell(Center(child:Text("e4",  textAlign: TextAlign.center))),
-            DataCell(Text("d5")),
-          ],),
-        ])*/;
+      ),
+
+
+    ],),
+      TextButton(
+        onPressed: onClick,
+        child: Text("Randomize opening "),
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.all(16.0),
+          primary: Colors.white,
+          backgroundColor: Colors.grey,
+          textStyle: const TextStyle(fontSize: 20),
+        ),
+      ),], );
+
   }
   
 }
