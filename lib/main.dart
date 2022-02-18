@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 
 import 'database/db_provider.dart';
 import 'models/chess_game.dart';
-
+import 'widgets/progress_indicator.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  var game = Game(moves: "1. e4 e5 2. Sf3 Sc6 3. Gc4 Gc5", openingName: 'Italian');
- // var db = ChessDatabase.instance;
-  //db.create(game);
-  // var returnedGame = db.read(1).then((value) {
-  //   print(value.convertForAppTable());
-  // });
+  var game = Game(moves: "1. d4 d5 2. c4 e6 3. Sf3 b6", openingName: 'Slovakian');
+  /*var db = ChessDatabase.instance;
+  db.create(game);
+   var returnedGame = db.readAll();
+   returnedGame.then((value) {
+     for (var game in value)
+       {
+          print("Opening ${game.openingName}");
+       }
+   });*/
   runApp( MyApp());
 }
 
@@ -47,79 +51,70 @@ class HomePage extends StatefulWidget{
 
 /// State to hold template data
 class _HomePageState extends State<HomePage>{
-  _HomePageState(){
-    _fetchFromDb();
-  }
+
   static const List<String> _columnNames = [
     "Nr",
     "White",
     "Black"
   ];
-  List<Map<String, List<String>>> _move = [];
-   /*List<List<Map<String, List<String>>>> _move = []; [
-    [
-    {
-      "move": ["1.", "e4", "e5"]
-    },
-    {
-      "move": ["2.", "e5", "e4"]
-    },
-  ],
-    [
-      {
-        "move": ["1.", "e6", "e5"]
-      },
-      {
-        "move": ["2.", "e5", "e4"]
-      },
-    ]
-  ];*/
-  void _fetchFromDb(){
-    var db = ChessDatabase.instance;
-    var returnedGame = db.read(1);
-      returnedGame.then((game) {
-        setState(() {
-          _move = game.convertForAppTable();
-        });
-      } );
-      print(_move);
-      //return (returnedGame as Game).convertForAppTable();
+  final List<List<Map<String, List<String>>>> _move = []  ;
 
+  // simple aquiring of data from database that is used in FutureBuilder class
+  Future<List<Game>> _fetchFromDb() async{
+    var db = ChessDatabase.instance;
+    var returnedGame = await  db.readAll();
+    return returnedGame;
   }
 
   var indeks = 0;
 
   void onClick(){
     setState(() {
-      _move = _move;
+      indeks = (indeks + 1)%2;
     });
   }
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 
+    return FutureBuilder(
 
+        future: _fetchFromDb(),
+        builder: (context, snapshot) {
+          Widget child;
+          if(snapshot.hasData){
+            List<Game> gamesList = snapshot.data as List<Game>;
+              for(var game in gamesList){
+                _move.add(game.convertForAppTable());
+              }
+              child = MoveTable( columns: _columnNames, moves:  _move[indeks]);
+          }
+          else
+            {
+              child = MyProgressIndicator();
+            }
+          return Column( children: <Widget>[
+          Row(children: <Widget>[
+          Expanded( child:
+          SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: child,
+          )
+          )
+          ],),
+            TextButton(
+              onPressed: onClick,
+              child: const Text("Randomize opening "),
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(16.0),
+                primary: Colors.white,
+                backgroundColor: Colors.grey,
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+            )
+          ])
 
-    return Column( children: <Widget>[
-      Row(children: <Widget>[
-      Expanded( child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: MoveTable( columns: _columnNames, moves:  _move)
-          ),
-      ),
-
-
-    ],),
-      TextButton(
-        onPressed: onClick,
-        child: Text("Randomize opening "),
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.all(16.0),
-          primary: Colors.white,
-          backgroundColor: Colors.grey,
-          textStyle: const TextStyle(fontSize: 20),
-        ),
-      ),], );
+          ;
+        });
 
   }
   
