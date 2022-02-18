@@ -1,9 +1,10 @@
-import 'package:chess/move_table.dart';
+import 'package:chess/widgets/move_table.dart';
 import 'package:flutter/material.dart';
 
 import 'database/db_provider.dart';
 import 'models/chess_game.dart';
 import 'widgets/progress_indicator.dart';
+import 'package:chess/widgets/navigation.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   var game = Game(moves: "1. d4 d5 2. c4 e6 3. Sf3 b6", openingName: 'Slovakian');
@@ -16,10 +17,10 @@ void main() {
           print("Opening ${game.openingName}");
        }
    });*/
-  runApp( MyApp());
+  runApp( ChessApp());
 }
 
-class MyApp extends StatelessWidget {
+class ChessApp extends StatelessWidget {
   static const String appTitle = "Chess opening randomizer";
   // This widget is the root of your application.
   @override
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: Scaffold(
+        drawer: NavigationDrawer(),
         appBar: AppBar(
           title: Text(appTitle)
           ,),

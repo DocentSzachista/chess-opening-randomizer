@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './header_row.dart';
+
 
 class MoveTable extends StatelessWidget {
   final List<String> columns;
@@ -11,10 +11,7 @@ class MoveTable extends StatelessWidget {
     return DataColumn(
       label:
          Expanded(
-                child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24),
+                child: Text(text, textAlign: TextAlign.center, style: TextStyle(fontSize: 24),
         )),
 
 
