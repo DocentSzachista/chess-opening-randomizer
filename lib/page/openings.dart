@@ -1,8 +1,11 @@
 import 'package:chess/models/chess_game.dart';
+import 'package:chess/widgets/progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:chess/widgets/navigation.dart';
 import 'show_opening.dart';
 import 'package:chess/database/db_provider.dart';
+
+/// page to display all openings that are currently in database
 class OpeningsPage extends StatelessWidget {
 
   @override
@@ -19,6 +22,8 @@ class OpeningsPage extends StatelessWidget {
     );
   }
 }
+
+/// list class
 class _OpeningsList extends StatelessWidget {
 
 
@@ -50,14 +55,14 @@ class _OpeningsList extends StatelessWidget {
         );
       }
       else{
-        child = Text("Nothing to do here");
+        child = MyProgressIndicator();
       }
       return child;
     });
 
 
   }
-
+  /// single list tile, required parameters: title of opening, clicked: function reference
   Widget _opening({required String title, VoidCallback? clicked}) {
     return Card(
         child: ListTile(

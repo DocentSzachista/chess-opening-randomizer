@@ -1,4 +1,6 @@
 import 'package:chess/models/chess_game.dart';
+import 'package:chess/page/openings.dart';
+import 'package:chess/widgets/move_table.dart';
 import 'package:flutter/material.dart';
 
 class ShowOpening extends StatefulWidget {
@@ -18,10 +20,18 @@ class _ShowOpeningState extends State<ShowOpening> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(icon:  Icon(Icons.arrow_back),
+        onPressed: (){
+          Navigator.of(context).pop();
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  (OpeningsPage())));
+        }
+        ),
         title: Text(_opening.openingName),
       ),
-      body: Text(_opening.moves),
+      body: MoveTable( moves: _opening.convertForAppTable()),
     );
   }
+
+
 }
 

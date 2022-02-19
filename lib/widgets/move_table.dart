@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 
 
 class MoveTable extends StatelessWidget {
-  final List<String> columns;
-  final List<Map<String, List<String>>> moves ;
-  final List<String> movesAnother = ['e4 e5', 'Sf3', 'Sc6'];
-  MoveTable({ required this.columns, required this.moves });
 
+  final List<String> columns =  [
+    "Nr",
+    "White",
+    "Black"
+  ];
+  /// list of moves to display in DataTable
+  /// TODO: try to simplify datastructure in nearest future
+  final List<Map<String, List<String>>> moves ;
+
+  MoveTable({  required this.moves });
+  /// helper function to generate table Column
   DataColumn _generateDataColumn(String text) {
     return DataColumn(
       label:
@@ -18,7 +25,7 @@ class MoveTable extends StatelessWidget {
       numeric: false,
     );
   }
-
+  /// helper function to generate table DataCell
   DataCell _generateDataCell(String text) {
     return DataCell(Align(
         alignment: Alignment.center,
@@ -32,21 +39,36 @@ class MoveTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // dirty trick  https://stackoverflow.com/questions/56625052/how-to-make-a-multi-column-flutter-datatable-widget-span-the-full-width
-    return DataTable(
-        columns: <DataColumn>[
-          ...columns.map((column) {
-            return _generateDataColumn(column);
-          }).toList(),
-        ], rows: <DataRow>[
-      ...moves.map((element) {
-        return DataRow(
-          cells: <DataCell>[
-            ...(element['move'] as List<String>).map((moveRow) {
-              return _generateDataCell(moveRow);
-            })
-          ],
-        );
-      }).toList()
-    ]);
+    return Column( children: <Widget>[
+      Row(children: <Widget>[
+        Expanded( child:
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child:  _retrieveDataTable()  ),
+        ),
+
+      ],
+      ),]
+    );
+
+  }
+  /// generate DataTable basing on moves list
+  Widget _retrieveDataTable(){
+      return DataTable(
+          columns: <DataColumn>[
+            ...columns.map((column) {
+              return _generateDataColumn(column);
+            }).toList(),
+          ], rows: <DataRow>[
+        ...moves.map((element) {
+          return DataRow(
+            cells: <DataCell>[
+              ...(element['move'] as List<String>).map((moveRow) {
+                return _generateDataCell(moveRow);
+              })
+            ],
+          );
+        }).toList()
+      ]);
   }
 }

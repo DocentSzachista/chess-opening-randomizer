@@ -54,11 +54,6 @@ class HomePage extends StatefulWidget{
 /// State to hold template data
 class _HomePageState extends State<HomePage>{
 
-  static const List<String> _columnNames = [
-    "Nr",
-    "White",
-    "Black"
-  ];
   final List<List<Map<String, List<String>>>> _move = []  ;
 
   // simple aquiring of data from database that is used in FutureBuilder class
@@ -88,21 +83,14 @@ class _HomePageState extends State<HomePage>{
               for(var game in gamesList){
                 _move.add(game.convertForAppTable());
               }
-              child = MoveTable( columns: _columnNames, moves:  _move[indeks]);
+              child = MoveTable( moves:  _move[indeks]);
           }
           else
             {
               child = MyProgressIndicator();
             }
           return Column( children: <Widget>[
-          Row(children: <Widget>[
-          Expanded( child:
-          SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: child,
-          )
-          )
-          ],),
+            child,
             TextButton(
               onPressed: onClick,
               child: const Text("Randomize opening "),
