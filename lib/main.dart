@@ -6,8 +6,8 @@ import 'models/chess_game.dart';
 import 'widgets/progress_indicator.dart';
 import 'package:chess/widgets/navigation.dart';
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  var game = Game(moves: "1. d4 d5 2. c4 e6 3. Sf3 b6", openingName: 'Slovakian');
+  //WidgetsFlutterBinding.ensureInitialized();
+  //var game = Game(moves: "1. d4 d5 2. c4 e6 3. Sf3 b6", openingName: 'Slovakian');
   /*var db = ChessDatabase.instance;
   db.create(game);
    var returnedGame = db.readAll();
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage>{
 
   void onClick(){
     setState(() {
-      indeks = (indeks + 1)%2;
+      indeks = (indeks + 1)%_move.length;
     });
   }
   @override

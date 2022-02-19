@@ -1,4 +1,7 @@
+
 import 'package:chess/models/chess_game.dart';
+import 'package:chess/page/create_opening.dart';
+import 'package:chess/widgets/footer_button.dart';
 import 'package:chess/widgets/progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:chess/widgets/navigation.dart';
@@ -19,8 +22,14 @@ class OpeningsPage extends StatelessWidget {
 
     ),
     body: _OpeningsList(),
+      bottomNavigationBar: FooterButton(text: "Add new opening", onClick: ()=> linkToCreator(context) )
     );
   }
+  void linkToCreator(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>AddOpening()) );
+  }
+
+
 }
 
 /// list class
