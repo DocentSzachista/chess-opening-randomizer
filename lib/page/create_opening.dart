@@ -1,8 +1,9 @@
+import 'package:chess/models/chess_game.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chess/widgets/footer_button.dart';
 import 'package:chess/widgets/form_fields.dart';
-
+import 'package:chess/database/db_provider.dart';
 class AddOpening extends StatefulWidget {
   const AddOpening({Key? key}) : super(key: key);
 
@@ -37,13 +38,19 @@ class _AddOpeningState extends State<AddOpening> {
     );
   }
 
-  void checkInputs(BuildContext context){
+  void checkInputs(BuildContext context) async{
     setState(() {
         _validateOpening = openingController.text.isNotEmpty;
         _validateOpeningName = openingNameController.text.isNotEmpty;
-        print(_validateOpening);
-        print(_validateOpeningName);
+
     });
+    if(_validateOpeningName && _validateOpeningName) {
+      Game game = Game(
+          moves: openingController.text,
+          openingName: openingNameController.text,
+      );
+      var cos = await ChessDatabase.instance.create(game);
+    }
   }
 
   @override
