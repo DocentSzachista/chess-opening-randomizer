@@ -54,6 +54,7 @@ class _OpeningsList extends StatelessWidget {
       if(snapshot.hasData){
         List<Game> openings = snapshot.data as List<Game>;
         child = ListView(
+          padding: const EdgeInsets.all(5.0),
             children: <Widget>[
               ...openings.map(
                       (opening) => _opening(

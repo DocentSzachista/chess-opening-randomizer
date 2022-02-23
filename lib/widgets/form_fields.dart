@@ -8,29 +8,30 @@ class OpeningTextField extends StatelessWidget {
   final String labelText;
   final String errorMessage;
   final bool validate;
-  int? lenghtLimit;
-  bool allowMultiline;
+  final int? lenghtLimit;
+  final bool allowMultiline;
   OpeningTextField({
     required this.controller,
     required this.labelText,
     required this.errorMessage,
     required this.validate,
-    this.lenghtLimit,
+    this.lenghtLimit = null,
     this.allowMultiline = false });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      child: TextField(
       controller: controller,
       decoration: InputDecoration(
         errorText: !validate ? errorMessage : null,
         border: OutlineInputBorder(),
-
-        labelText: labelText
+        labelText: labelText,
+        contentPadding: EdgeInsets.all(20.0),
       ),
       maxLength:  lenghtLimit,
-      maxLines: allowMultiline? 2 : 1,
-
+      maxLines: allowMultiline? 2 : 1,),
     );
   }
 }

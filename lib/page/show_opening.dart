@@ -1,5 +1,6 @@
 import 'package:chess/models/chess_game.dart';
 import 'package:chess/page/openings.dart';
+import 'package:chess/widgets/footer_button.dart';
 import 'package:chess/widgets/move_table.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class _ShowOpeningState extends State<ShowOpening> {
 
   _ShowOpeningState(this._opening);
 
+//  final FooterButton button = FooterButton(text: "text", onClick:() {print("xD");} );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +32,9 @@ class _ShowOpeningState extends State<ShowOpening> {
         title: Text(_opening.openingName),
       ),
       body: MoveTable( moves: _opening.convertForAppTable()),
+     // bottomNavigationBar: button,
     );
   }
-
 
 }
 

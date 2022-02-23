@@ -13,9 +13,10 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer( child: Material(
+
       color:  Colors.blueGrey,
       child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         children: <Widget>[
            listHeader(text: "Menu"),
            listViewItem(text: "Random generator", icon: Icons.book_online, clicked: () => selectedItem(context, 0)),
