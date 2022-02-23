@@ -39,10 +39,12 @@ class NavigationDrawer extends StatelessWidget {
       Navigator.of(context).pop();
       switch(index){
         case 0:
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ChessApp()));
+          //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ChessApp()));
+          Navigator.popUntil(context, ModalRoute.withName('/'));
           break;
         case 1:
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>OpeningsPage() ));
+          Navigator.pushNamed( context, '/openings' );
+          //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>OpeningsPage() ));
           break;
       }
   }

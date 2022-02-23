@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage>{
 
   var indeks = 0;
 
+  // TODO: make some sort of generation engine
   void onClick(){
     setState(() {
       indeks = (indeks + 1)%_move.length;

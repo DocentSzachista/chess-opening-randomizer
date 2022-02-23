@@ -32,17 +32,19 @@ class _AddOpeningState extends State<AddOpening> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
       appBar: AppBar(title: Text("Add new opening"),),
       body: retrieveForm(),
-      bottomNavigationBar: FooterButton(text: "Add new opening", onClick: ()=>checkInputs(context),),
-    );
+      bottomNavigationBar:  FooterButton(text: "Add new opening", onClick: ()=>checkInputs(context),),
+    ), );
   }
 
   /// utility funcion that displays AlertDialog after insertion new item to dabase
   void _infoDialog(){
     AlertDialog dialog = AlertDialog(
-      title: const Text("Added new opening", textAlign: TextAlign.center,),
+      title:  Text("Added new opening", textAlign: TextAlign.center,),
       content: const Icon(Icons.check_circle, color: Colors.green,),
       actions: <Widget>[
         Container(
@@ -51,8 +53,10 @@ class _AddOpeningState extends State<AddOpening> {
             alignment: Alignment.center,
             child: TextButton(onPressed: () async {
 
-              Navigator.pop(context, true);
-              await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>OpeningsPage()));
+              //Navigator.popUntil(context, ModalRoute.withName('/openings') );
+              Navigator.pop(context);
+              Navigator.pop(context);
+              //await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>OpeningsPage()));
             },
                 child: const Text("Oki", style: TextStyle(color: Colors.white),))
         ),

@@ -83,8 +83,9 @@ class _OpeningsList extends StatelessWidget {
 
   ///function used to relocate to view where you can display opening data
   void selectedOpening(BuildContext context, Game opening) {
-    Navigator.of(context).pop();
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  (ShowOpening(opening: opening,))));
+    //Navigator.of(context).pop();
+    Navigator.pushNamed(context, '/show_opening', arguments: opening );
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  (ShowOpening(opening: opening,))));
   }
 }
 

@@ -1,10 +1,8 @@
 import 'package:chess/page/opening_generation.dart';
-import 'package:chess/widgets/move_table.dart';
+
+import 'package:chess/routes/RouteGenerator.dart';
 import 'package:flutter/material.dart';
 
-import 'database/db_provider.dart';
-import 'models/chess_game.dart';
-import 'widgets/progress_indicator.dart';
 
 void main() {
   //WidgetsFlutterBinding.ensureInitialized();
@@ -27,13 +25,17 @@ class ChessApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: OpeningGenerationPage(appTitle: appTitle,),
-
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generate,
+      home: OpeningGenerationPage(appTitle: appTitle),
     );
   }
 }
+
+
 
