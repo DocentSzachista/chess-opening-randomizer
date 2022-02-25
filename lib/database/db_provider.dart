@@ -54,7 +54,13 @@ class ChessDatabase{
      }).toList();
      return games;
   }
-
+  Future delete(int id) async{
+    final db = await instance.database;
+    return await db.delete(tableName,
+      where: "${GameFields.id} = ?",
+      whereArgs: [id],
+    );
+  }
 
    /// initialize a new database
   Future<Database> _initDatabase(String dbFileName) async {

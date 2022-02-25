@@ -11,7 +11,7 @@ class RouteGenerator {
     final args = settings.arguments;
     switch(settings.name){
       case '/':
-        return MaterialPageRoute(builder: (context) => OpeningGenerationPage(appTitle: "xD"));
+        return MaterialPageRoute(builder: (context) => OpeningGenerationPage(appTitle: "Chess openings randomizer"));
       case '/openings':
         return MaterialPageRoute(builder: (context)=> OpeningsPage());
       case '/show_opening':

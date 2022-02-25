@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import 'package:chess/widgets/navigation.dart';
 
@@ -39,7 +40,7 @@ class HomePage extends StatefulWidget{
 class _HomePageState extends State<HomePage>{
 
   final List<List<Map<String, List<String>>>> _move = []  ;
-
+  final Random random = Random();
   // simple aquiring of data from database that is used in FutureBuilder class
   Future<List<Game>> _fetchFromDb() async{
     var db = ChessDatabase.instance;
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage>{
   // TODO: make some sort of generation engine
   void onClick(){
     setState(() {
-      indeks = (indeks + 1)%_move.length;
+      indeks = random.nextInt(_move.length);
     });
   }
   @override
@@ -78,7 +79,7 @@ class _HomePageState extends State<HomePage>{
             child,
             TextButton(
               onPressed: onClick,
-              child: const Text("Randomize opening "),
+              child: const Text("Get Random Opening"),
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.all(16.0),
                 primary: Colors.white,

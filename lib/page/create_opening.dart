@@ -56,6 +56,7 @@ class _AddOpeningState extends State<AddOpening> {
               //Navigator.popUntil(context, ModalRoute.withName('/openings') );
               Navigator.pop(context);
               Navigator.pop(context);
+              //Navigator.pushNamed(context, "/openings");
               //await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>OpeningsPage()));
             },
                 child: const Text("Oki", style: TextStyle(color: Colors.white),))
@@ -80,7 +81,8 @@ class _AddOpeningState extends State<AddOpening> {
           moves: openingController.text,
           openingName: openingNameController.text,
       );
-      var cos = await ChessDatabase.instance.readAll(); //ChessDatabase.instance.create(game);
+      var cos = await //ChessDatabase.instance.readAll();
+       ChessDatabase.instance.create(game);
       _infoDialog();
     }
   }
