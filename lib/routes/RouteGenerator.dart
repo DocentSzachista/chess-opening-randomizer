@@ -5,6 +5,8 @@ import '../page/opening_generation.dart';
 import '../page/openings.dart';
 import '../page/show_opening.dart';
 
+
+/// RouteGenerator to resolve routing in app
 class RouteGenerator {
 
   static Route<dynamic> generate(RouteSettings settings){
@@ -17,7 +19,19 @@ class RouteGenerator {
       case '/show_opening':
         return MaterialPageRoute(builder: (context)=> ShowOpening(opening: args as Game));
       default:
-        return MaterialPageRoute(builder: (context) => const Text("Error"));
+        return MaterialPageRoute(builder: (context) => _errorWidget());
     }
+  }
+  /// display info about error
+  static Widget _errorWidget(){
+    return Scaffold(
+      body: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+        children:const <Widget>[
+          Text("Error, no route here")
+        ],
+    ),
+    );
   }
 }

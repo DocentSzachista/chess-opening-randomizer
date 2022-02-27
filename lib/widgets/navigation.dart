@@ -1,10 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:chess/page/openings.dart';
 
-import '../main.dart';
-
+/// Navigation drawer for app
 class NavigationDrawer extends StatelessWidget {
 
   static const Color _textColor = Colors.white;
@@ -26,7 +24,10 @@ class NavigationDrawer extends StatelessWidget {
     ),
     );
   }
-
+  /// util function returns @ListTile element with data
+  /// @text which describres listile
+  /// @icon to provide fancy icon in @ListTile
+  /// @clicked callback to function to resolve onTap
   Widget listViewItem({required String text, required IconData icon, VoidCallback? clicked}) {
       const double fontSize = 18;
       return ListTile(
@@ -35,19 +36,22 @@ class NavigationDrawer extends StatelessWidget {
         onTap: clicked,
       );
   }
+  /// resolves navigation, on click of tiles
+  /// @context BuildContext,
+  /// @index index of listElement
   void selectedItem(BuildContext context, int index){
       Navigator.of(context).pop();
       switch(index){
         case 0:
-          //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ChessApp()));
           Navigator.popUntil(context, ModalRoute.withName('/'));
           break;
         case 1:
           Navigator.pushNamed( context, '/openings' );
-          //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>OpeningsPage() ));
           break;
       }
   }
+  /// just a header for NavigationDrawer
+  /// @text to display as header
   Widget listHeader({required text}){
      return ListTile( title: Text(text,
        textAlign: TextAlign.center,

@@ -85,7 +85,8 @@ class _OpeningsPageState extends State<OpeningsPage>{
   }
 
 
-  /// single list tile, required parameters: title of opening, clicked: function reference
+  /// single list tile, required parameters: @title is a opening title,
+  /// @clicked: function reference to resolve onPressed:
   Widget _opening({required String title, VoidCallback? clicked}) {
     return Card(
         child: ListTile(
@@ -104,8 +105,6 @@ class _OpeningsPageState extends State<OpeningsPage>{
   void selectedOpening(BuildContext context, Game opening) {
     Navigator.pop(context);
     Navigator.pushNamed(context, '/show_opening', arguments: opening);
-
-    //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  (ShowOpening(opening: opening,))));
   }
 }
 
