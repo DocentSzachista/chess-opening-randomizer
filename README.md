@@ -1,16 +1,14 @@
-# chess
+# Chess opening randomizer
 
-A new Flutter project.
+## Introduction
+As the title of project says it is an app to randomize chess openings. Why? I had request from my friend if I can write that kind of app. 
+Why flutter? I wanted to try write mobile app and here you can see outcome.
 
-## Getting Started
+## So what can I do here?
+You can randomize openings, add new openings to database and delete ones that you don't like. 
+In nearest future I will try to add preview screenshots.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Plans for future
+- Add insertion through upload PGN file,
+- Display openings on a chess board,
+- Very far future: add some sort of learning platform 
