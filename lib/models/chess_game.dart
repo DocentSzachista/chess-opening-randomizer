@@ -48,20 +48,34 @@ class Game{
     openingName: json[GameFields.openingName] as String,
   );
 
-  List<Map<String, List<String>>> convertForAppTable(){
-     List<String> tempData = moves.split(" ");
+  // List<Map<String, List<String>>> convertForAppTable(){
+  //    List<String> tempData = moves.split(" ");
+  //
+  //    List<Map<String, List<String>>> returnValue = [];
+  //    List<String> temp = [];
+  //
+  //    for(var element in tempData){
+  //      temp.add(element);
+  //      if(temp.length == 3) {
+  //          returnValue.add({"move": temp});
+  //          temp= [];
+  //        }
+  //
+  //    }
+  //    return returnValue;
+  // }
+    List<List<String>> convertForAppTable(){
+      List<String> tempData = moves.split(" ");
 
-     List<Map<String, List<String>>> returnValue = [];
-     List<String> temp = [];
-
-     for(var element in tempData){
-       temp.add(element);
-       if(temp.length == 3) {
-           returnValue.add({"move": temp});
-           temp= [];
-         }
-
-     }
-     return returnValue;
-  }
+      List<List<String>> returnValue = [];
+      List<String> temp = [];
+      for( var element in tempData){
+        temp.add(element);
+        if(temp.length == 3) {
+          returnValue.add(temp);
+          temp= [];
+        }
+      }
+      return returnValue;
+    }
 }

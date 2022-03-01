@@ -6,7 +6,7 @@ class MoveTable extends StatelessWidget {
  
   /// list of moves to display in DataTable
   /// TODO: try to simplify datastructure in nearest future
-  final List<Map<String, List<String>>> moves ;
+  final List< List<String>> moves ;
 
   MoveTable({  required this.moves });
   /// helper function to generate table Column
@@ -59,7 +59,7 @@ class MoveTable extends StatelessWidget {
         ...moves.map((element) {
           return DataRow(
             cells: <DataCell>[
-              ...(element['move'] as List<String>).map((moveRow) {
+              ...(element ).map((moveRow) {
                 return _generateDataCell(moveRow);
               })
             ],

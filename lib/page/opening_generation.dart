@@ -41,7 +41,7 @@ class HomePage extends StatefulWidget{
 /// State to hold template data
 class _HomePageState extends State<HomePage>{
 
-  final List<List<Map<String, List<String>>>> _move = []  ;
+  final List<List< List<String>>> _move = []  ;
   final Random random = Random();
   // simple aquiring of data from database that is used in FutureBuilder class
   Future<List<Game>> _fetchFromDb() async{
