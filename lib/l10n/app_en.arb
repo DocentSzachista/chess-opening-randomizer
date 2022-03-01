@@ -1,0 +1,17 @@
+{
+
+  "openingRandPageName":"Chess opening randomizer",
+  "randButton": "Choose random opening",
+  "@randButton": {
+    "description": "Text on a button to choose opening randomely"
+  },
+  "openingListPageName": "Listed openings",
+  "@openingListPageName": {
+    "description": "Title for opening list page"
+  },
+  "createOpeningButton": "Add new opening",
+  "@createOpeningButton": {
+    "description": ""
+  },
+  "tableHeaders": "Nr:White:Black"
+}

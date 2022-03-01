@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoveTable extends StatelessWidget {
 
-  final List<String> columns =  [
-    "Nr",
-    "White",
-    "Black"
-  ];
+ 
   /// list of moves to display in DataTable
   /// TODO: try to simplify datastructure in nearest future
   final List<Map<String, List<String>>> moves ;
@@ -44,7 +40,7 @@ class MoveTable extends StatelessWidget {
         Expanded( child:
         SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child:  _retrieveDataTable()  ),
+          child:  _retrieveDataTable(context)  ),
         ),
 
       ],
@@ -53,10 +49,10 @@ class MoveTable extends StatelessWidget {
 
   }
   /// generate DataTable basing on moves list
-  Widget _retrieveDataTable(){
+  Widget _retrieveDataTable(BuildContext context){
       return DataTable(
           columns: <DataColumn>[
-            ...columns.map((column) {
+            ...AppLocalizations.of(context)!.tableHeaders.split(":").map((column) {
               return _generateDataColumn(column);
             }).toList(),
           ], rows: <DataRow>[

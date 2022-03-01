@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:chess/models/chess_game.dart';
 import 'package:chess/page/create_opening.dart';
@@ -28,11 +28,11 @@ class _OpeningsPageState extends State<OpeningsPage>{
         drawer: NavigationDrawer(),
         appBar: AppBar(
 
-          title: Text("Listed openings"),
+          title: Text(AppLocalizations.of(context)!.openingListPageName),
 
         ),
         body: isLoading == false ? _openingList() : Text("Loaduje"),
-        bottomNavigationBar: FooterButton(text: "Add new opening", onClick: ()=> _linkToCreator(context) )
+        bottomNavigationBar: FooterButton(text: AppLocalizations.of(context)!.createOpeningButton, onClick: ()=> _linkToCreator(context) )
     );
   }
   @override

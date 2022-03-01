@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:chess/widgets/navigation.dart';
 
 import '../database/db_provider.dart';
 import '../models/chess_game.dart';
 import '../widgets/move_table.dart';
 import '../widgets/progress_indicator.dart';
+
+
+
 class OpeningGenerationPage extends StatelessWidget {
-  final String appTitle;
-  const OpeningGenerationPage({required String this.appTitle}) ;
+  OpeningGenerationPage() ;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawer(),
       appBar: AppBar(
-        title: Text(appTitle)
+        title: Text(AppLocalizations.of(context)!.openingRandPageName)
         ,),
       body: HomePage(),
     );
@@ -79,7 +81,7 @@ class _HomePageState extends State<HomePage>{
             child,
             TextButton(
               onPressed: onClick,
-              child: const Text("Get Random Opening"),
+              child: Text(AppLocalizations.of(context)!.randButton),
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.all(16.0),
                 primary: Colors.white,
