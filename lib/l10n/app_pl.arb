@@ -4,5 +4,6 @@
   "randButton": "Wylosuj otwarcie",
   "openingListPageName": "Lista otwarć",
   "createOpeningButton": "Dodaj nowe otwarcie",
-  "tableHeaders": "Nr:Białe:Czarne"
+  "tableHeaders": "Nr:Białe:Czarne",
+  "lastDraw": "Ostatnio wylosowano"
 }

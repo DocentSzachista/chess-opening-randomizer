@@ -13,5 +13,6 @@
   "@createOpeningButton": {
     "description": ""
   },
-  "tableHeaders": "Nr:White:Black"
+  "tableHeaders": "Nr:White:Black",
+  "lastDraw": "Last drawed"
 }
