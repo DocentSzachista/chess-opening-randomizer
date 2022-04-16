@@ -1,12 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:chess/widgets/navigation.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:chess/widgets/popup_box.dart';
 import '../database/db_provider.dart';
 import '../models/chess_game.dart';
 import '../widgets/move_table.dart';
@@ -15,7 +15,7 @@ import '../widgets/progress_indicator.dart';
 
 
 class OpeningGenerationPage extends StatelessWidget {
-  OpeningGenerationPage() ;
+  const OpeningGenerationPage() ;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage>{
   final Random random = Random();
   DateTime now = DateTime.now();
   String _lastDate = "";
-  int _indeks = 0;
+  int _index = 0;
 
 
   // simple aquiring of data from database that is used in FutureBuilder class
@@ -73,12 +73,23 @@ class _HomePageState extends State<HomePage>{
   // TODO: make some sort of generation engine
   void  onClick() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _indeks = random.nextInt(_move.length);
-      _lastDate = DateFormat("yyyy-MM-dd").format(now);
-      prefs.setString("lastDate", _lastDate);
-      print(_lastDate);
-    });
+    var temp = DateFormat("yyyy-MM-dd").format(now);
+    if(temp == prefs.getString("lastDate")) {
+      showDialog(
+          context: context,
+          builder: (_) =>  PopupBox(
+              title: AppLocalizations.of(context)!.rollTitle,
+              description: AppLocalizations.of(context)!.rollDescription
+          )
+      );
+    }
+    else {
+      setState(() {
+        _index = random.nextInt(_move.length);
+        _lastDate = temp;
+        prefs.setString("lastDate", _lastDate);
+      });
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -92,10 +103,9 @@ class _HomePageState extends State<HomePage>{
             for(var game in gamesList){
               _move.add(game.convertForAppTable());
             }
-            child = MoveTable( moves:  _move[_indeks]);
+            child = MoveTable( moves:  _move[_index]);
           }
-          else
-          {
+          else  {
             child = MyProgressIndicator();
           }
           return Column( children: <Widget>[
@@ -112,11 +122,7 @@ class _HomePageState extends State<HomePage>{
                 textStyle: const TextStyle(fontSize: 20),
               ),
             ),
-          ])
-
-          ;
+          ]);
         });
-
   }
-
 }

@@ -1,7 +1,7 @@
 import 'package:chess/models/chess_game.dart';
 import 'package:chess/page/openings.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:chess/widgets/footer_button.dart';
 import 'package:chess/widgets/form_fields.dart';
 import 'package:chess/database/db_provider.dart';
@@ -81,8 +81,7 @@ class _AddOpeningState extends State<AddOpening> {
           moves: openingController.text,
           openingName: openingNameController.text,
       );
-      var cos = await //ChessDatabase.instance.readAll();
-       ChessDatabase.instance.create(game);
+      var cos = await ChessDatabase.instance.create(game);
       _infoDialog();
     }
   }
@@ -97,15 +96,15 @@ class _AddOpeningState extends State<AddOpening> {
       children: <Widget>[
         OpeningTextField(
           controller:  openingNameController,
-          errorMessage: openingNameError,
-          labelText:  openingNameHint,
+          errorMessage: AppLocalizations.of(context)!.openingNameError,
+          labelText:  AppLocalizations.of(context)!.openingNameHint,
           validate: _validateOpeningName,
           lenghtLimit: 50,
         ),
         OpeningTextField(
             controller: openingController,
-            labelText: openingHint,
-            errorMessage: openingError,
+            labelText: AppLocalizations.of(context)!.openingHint,
+            errorMessage: AppLocalizations.of(context)!.openingError,
             validate: _validateOpening,
             allowMultiline: true,
         ),

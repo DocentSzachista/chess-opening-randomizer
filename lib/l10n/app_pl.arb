@@ -5,5 +5,11 @@
   "openingListPageName": "Lista otwarć",
   "createOpeningButton": "Dodaj nowe otwarcie",
   "tableHeaders": "Nr:Białe:Czarne",
-  "lastDraw": "Ostatnio wylosowano"
+  "lastDraw": "Ostatnio wylosowano",
+  "rollTitle": "Już losowano",
+  "rollDescription": "Już wylosowałeś swoje otwarcie na dzisiaj :)",
+  "openingNameHint": "Wprowadź nazwę otwarcia",
+  "openingHint":"Wpisz swoje otwarcie",
+  "openingNameError": "Musisz podać nazwę otwarcia",
+  "openingError": "Musisz podać ruchy w otwarciu "
 }

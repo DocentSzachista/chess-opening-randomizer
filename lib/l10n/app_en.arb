@@ -14,5 +14,12 @@
     "description": ""
   },
   "tableHeaders": "Nr:White:Black",
-  "lastDraw": "Last drawed"
+  "lastDraw": "Last drawed",
+  "rollTitle": "Already rolled",
+  "rollDescription": "You have today rolled for your new opening already :)",
+  "openingNameHint": "Input your opening name",
+  "openingHint":"Input your opening here",
+  "openingNameError": "You must provide name of the opening",
+  "openingError": "You must provide opening lines"
+
 }
